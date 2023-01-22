@@ -1,13 +1,13 @@
-﻿@inject IProductService productService
-
-@if(productService.Products == null || productService.Products.Count == 0)
+﻿@inject IProductService ProductService
+@implements IDisposable 
+@if(ProductService.Products == null || ProductService.Products.Count == 0)
 {
     <span>Loading Products...</span>
 }
 else
 {
     <ul class="list-unstyled">
-        @foreach (var product in productService.Products)
+        @foreach (var product in ProductService.Products)
         {
             <li class="media my-3">
                 <div class="media-img-wrapper mr-2">
@@ -20,7 +20,7 @@ else
                         <h4 class="mb-0">@product.Title</h4>
                     </a>
                     <p>@product.Description</p>
-                    <h5 class="price">$@product.Price</h5>
+                    <h5 class="price">@GetPriceText(product)</h5>
                 </div>
             </li>
         }
@@ -29,10 +29,26 @@ else
 }
 
 @code {
-    private static List<Product> Products = new List<Product>();
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await productService.GetProducts();
+        ProductService.ProductsChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProductService.ProductsChanged -= StateHasChanged;
+    }
+
+    private string GetPriceText(Product product)
+    {
+        var variants = product.Variants;
+        if(variants.Count == 0)
+        {
+            return string.Empty;
+        }else if(variants.Count == 0) {
+            return $"${variants[0].Price}";
+        }
+        decimal minPrice = variants.Min(v => v.Price);
+        return $"Starting at ${minPrice}";
     }
 }
