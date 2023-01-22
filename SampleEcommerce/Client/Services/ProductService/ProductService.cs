@@ -12,6 +12,7 @@ namespace SampleEcommerce.Client.Services.ProductService
             _http = http;
         }
         public List<Product> Products { get; set; } = new List<Product>();
+        public string Message { get; set; } = "Loading products...";
 
         public async Task GetProducts(string? categoryUrl = null)
         {
@@ -29,6 +30,29 @@ namespace SampleEcommerce.Client.Services.ProductService
             var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/Product/{productId}");
             return result;
         }
+
+        public async Task SearchProducts(string searchText)
+        {
+            //LastSearchText = searchText;
+            var result = await _http
+                 .GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/search/{searchText}");
+            if (result != null && result.Data != null)
+            {
+                Products = result.Data;
+                //CurrentPage = result.Data.CurrentPage;
+               // PageCount = result.Data.Pages;
+            }
+            if (Products.Count == 0) Message = "No products found.";
+            ProductsChanged?.Invoke();
+        }
+
+        public async Task<List<string>> GetProductSearchSuggestions(string searchText)
+        {
+            var result = await _http
+                .GetFromJsonAsync<ServiceResponse<List<string>>>($"api/product/searchsuggestions/{searchText}");
+            return result.Data;
+        }
+
 
     }
 }
