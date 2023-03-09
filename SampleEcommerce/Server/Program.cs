@@ -3,6 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 global using SampleEcommerce.Server.Data;
 global using SampleEcommerce.Server.Services.ProductService;
 global using SampleEcommerce.Server.Services.CategoryService;
+global using SampleEcommerce.Server.Services.CartService;
 global using SampleEcommerce.Server.Services.AuthService;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
