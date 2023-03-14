@@ -123,7 +123,7 @@ namespace SampleEcommerce.Server.Services.AuthService
             return jwt;
         }
 
-        /*public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
+        public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
@@ -143,7 +143,7 @@ namespace SampleEcommerce.Server.Services.AuthService
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
-        }*/
+        }
 
         public async Task<User> GetUserByEmail(string email)
         {
