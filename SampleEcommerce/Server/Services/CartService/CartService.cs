@@ -58,7 +58,7 @@
                 return result;
             }
 
-          /*  public async Task<ServiceResponse<List<CartProductResponse>>> StoreCartItems(List<CartItem> cartItems)
+           public async Task<ServiceResponse<List<CartProductResponse>>> StoreCartItems(List<CartItem> cartItems)
             {
                 cartItems.ForEach(cartItem => cartItem.UserId = _authService.GetUserId());
                 _context.CartItems.AddRange(cartItems);
@@ -143,6 +143,6 @@
                 await _context.SaveChangesAsync();
 
                 return new ServiceResponse<bool> { Data = true };
-            }*/
+            }
     }
 }

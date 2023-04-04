@@ -20,9 +20,9 @@ namespace SampleEcommerce.Server.Services.AuthService
             _httpContextAccessor = httpContextAccessor;
         }
 
-        //public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-       // public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+        public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
 
         public async Task<ServiceResponse<string>> Login(string email, string password)
         {
