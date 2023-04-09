@@ -28,5 +28,5 @@ namespace SampleEcommerce.Server.Controllers
             return Ok(result);
         }
     }
-}
+
 }
