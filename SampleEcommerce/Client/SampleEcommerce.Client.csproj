@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Shared\SampleEcommerce.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+  </ItemGroup>
+
 </Project>
